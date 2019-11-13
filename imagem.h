@@ -7,6 +7,7 @@ typedef struct imagem{
 	int largura;
 	int altura;
 	pixel pixel;
+	pixel **mat;
 }PPM;
 
 PPM lerArquivo();

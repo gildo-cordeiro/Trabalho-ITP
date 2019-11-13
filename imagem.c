@@ -32,8 +32,6 @@ void gerarImagem(PPM imagem){
         for (int j = 0; j < imagem.largura; j++){
             fprintf(arquivo,"%d %d %d\n", imagem.pixel.red, imagem.pixel.green, imagem.pixel.blue);
         }        
-    } 
-
-    
+    }
     fclose(arquivo);   
 }
