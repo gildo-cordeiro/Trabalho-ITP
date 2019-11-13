@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "imagem.h"
 #include "pixel.h"
+#include "ponto.h"
 
 PPM lerArquivo(){  
 
@@ -16,6 +17,11 @@ PPM lerArquivo(){
     fscanf(arquivo, "image %d %d\ncolor %d %d %d\n", &imagem.altura, &imagem.largura, &imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);
     
     fclose(arquivo);
+
+    imagem.mat = (pixel**)malloc(imagem.altura * sizeof(pixel*));    
+    for (int i = 0; i < imagem.altura; i++){
+        imagem.mat[i] = (pixel*)malloc(imagem.largura * sizeof(pixel));
+    }
 
     return imagem;
 }
@@ -33,12 +39,14 @@ void gerarImagem(PPM imagem){
             fprintf(arquivo,"%d %d %d\n", imagem.pixel.red, imagem.pixel.green, imagem.pixel.blue);
         }        
     }
-
-    imagem.mat = (pixel**)malloc(imagem.altura * sizeof(pixel*));
-    
-    for (int i = 0; i < imagem.altura; i++){
-        imagem.mat[i] = (pixel*)malloc(imagem.largura * sizeof(pixel));
-    }
-
     fclose(arquivo);   
+}
+
+int desenharPonto(ponto p){
+    PPM imagem;
+    pixel pixel;
+
+    imagem.mat[p.x][p.y] = corPixel(0,0,0);
+    
+    gerarImagem(imagem);
 }

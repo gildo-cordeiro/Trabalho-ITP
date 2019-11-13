@@ -5,4 +5,6 @@ typedef struct ponto{
 	int x, y;
 }ponto;
 
+ponto definirPonto(int x, int y);
+
 #endif
