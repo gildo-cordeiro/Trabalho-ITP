@@ -3,7 +3,7 @@
 #include "imagem.h"
 #include "pixel.h"
 
-void lerArquivo(){  
+PPM lerArquivo(){  
 
     FILE *arquivo = fopen("arquivo.txt","r");
     if (arquivo == NULL){
@@ -12,15 +12,15 @@ void lerArquivo(){
     }
 
     PPM imagem;
-    pixel pixel;
 
-    fscanf(arquivo, "image %d %d\ncolor %d %d %d\n", &imagem.altura, &imagem.largura, &pixel.red, &pixel.green, &pixel.blue);
+    fscanf(arquivo, "image %d %d\ncolor %d %d %d\n", &imagem.altura, &imagem.largura, &imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);
     
     fclose(arquivo);
-    gerarImagem(imagem, pixel);
+
+    return imagem;
 }
 
-void gerarImagem(PPM imagem, pixel RGB){
+void gerarImagem(PPM imagem){
     FILE *arquivo = fopen("arquivo.ppm","w");
     if (arquivo == NULL){
         printf("Erro ao criar arquivo");
@@ -30,8 +30,10 @@ void gerarImagem(PPM imagem, pixel RGB){
     fprintf(arquivo,"P3\n%d %d\n255\n", imagem.altura, imagem.largura);
     for (int i = 0; i < imagem.altura; i++){
         for (int j = 0; j < imagem.largura; j++){
-            fprintf(arquivo,"%d %d %d\n", RGB.red, RGB.green, RGB.blue);
+            fprintf(arquivo,"%d %d %d\n", imagem.pixel.red, imagem.pixel.green, imagem.pixel.blue);
         }        
     } 
+
+    
     fclose(arquivo);   
 }

@@ -4,6 +4,7 @@
 
 int main(int argc, char const *argv[]){
 	
-    lerArquivo();	
+    gerarImagem(lerArquivo());	
+
 	return 0;
 }

@@ -6,11 +6,11 @@
 typedef struct imagem{
 	int largura;
 	int altura;
-	pixel **pixel;
+	pixel pixel;
 }PPM;
 
-void lerArquivo(void);
+PPM lerArquivo();
 
-void gerarImagem(PPM imagem, pixel pixel);
+void gerarImagem(PPM imagem);
 
 #endif
