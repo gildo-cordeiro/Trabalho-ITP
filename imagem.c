@@ -38,6 +38,10 @@ void gerarImagem(PPM imagem){
             fprintf(arquivo,"%d %d %d\n", imagem.mat[i][j].red, imagem.mat[i][j].green, imagem.mat[i][j].blue);
         }        
     }
-    fclose(arquivo);   
+    fclose(arquivo);
+    
+    for (int i = 0; i < imagem.altura; i++){
+          free(imagem.mat[i]);
+      }  
     free(imagem.mat);
 }
