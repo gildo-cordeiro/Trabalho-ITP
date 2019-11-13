@@ -34,6 +34,14 @@ void gerarImagem(PPM imagem){
         }        
     } 
 
+    imagem.mat = (pixel**)malloc(imagem.altura * sizeof(pixel*));
     
+    for (int i = 0; i < imagem.altura; i++){
+        imagem.mat[i] = (pixel*)malloc(imagem.largura * sizeof(pixel));
+    }
+    
+
+
+
     fclose(arquivo);   
 }
