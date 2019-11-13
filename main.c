@@ -2,11 +2,9 @@
 #include <stdlib.h>
 #include "imagem.h"
 #include "ponto.h"
+#include "desenho.h"
 
 int main(int argc, char const *argv[]){
-	
-    //gerarImagem(lerArquivo());
-
     int x, y;	
 
     printf("Informe o ponto na forma X e Y:\n");
