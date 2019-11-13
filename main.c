@@ -5,7 +5,7 @@
 
 int main(int argc, char const *argv[]){
 	
-    gerarImagem(lerArquivo());
+    //gerarImagem(lerArquivo());
 
     int x, y;	
 
@@ -14,7 +14,7 @@ int main(int argc, char const *argv[]){
 
     ponto p = definirPonto(x,y);
 
-    
-    
+    desenharPonto(lerArquivo(), p);
+
 	return 0;
 }

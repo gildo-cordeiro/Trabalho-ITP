@@ -2,6 +2,7 @@
 #define IMAGEM_H
 
 #include "pixel.h"
+#include "ponto.h"
 
 typedef struct imagem{
 	int largura;
@@ -13,5 +14,7 @@ typedef struct imagem{
 PPM lerArquivo();
 
 void gerarImagem(PPM imagem);
+
+void desenharPonto(PPM imagem, ponto p);
 
 #endif

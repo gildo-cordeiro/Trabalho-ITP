@@ -5,7 +5,6 @@
 #include "ponto.h"
 
 PPM lerArquivo(){  
-
     FILE *arquivo = fopen("arquivo.txt","r");
     if (arquivo == NULL){
         printf("Erro ao abrir arquivo");
@@ -36,17 +35,24 @@ void gerarImagem(PPM imagem){
     fprintf(arquivo,"P3\n%d %d\n255\n", imagem.altura, imagem.largura);
     for (int i = 0; i < imagem.altura; i++){
         for (int j = 0; j < imagem.largura; j++){
-            fprintf(arquivo,"%d %d %d\n", imagem.pixel.red, imagem.pixel.green, imagem.pixel.blue);
+            fprintf(arquivo,"%d %d %d\n", imagem.mat[i][j].red, imagem.mat[i][j].green, imagem.mat[i][j].blue);
         }        
     }
     fclose(arquivo);   
+    free(imagem.mat);
 }
 
-int desenharPonto(ponto p){
-    PPM imagem;
-    pixel pixel;
+void desenharPonto(PPM imagem, ponto p){
+    //printf("%d",p.y);    
 
-    imagem.mat[p.x][p.y] = corPixel(0,0,0);
-    
+    for (int i = 0; i < imagem.altura; i++){
+        for (int j = 0; j < imagem.largura; j++){
+            if (p.x == i && p.y == j){
+                imagem.mat[i][j] = corPixel(0,0,0);
+            }else{
+                imagem.mat[i][j] = corPixel(imagem.pixel.red,imagem.pixel.green, imagem.pixel.blue);
+            }           
+        }        
+    }    
     gerarImagem(imagem);
 }
