@@ -39,9 +39,9 @@ void gerarImagem(PPM imagem){
         }        
     }
     fclose(arquivo);
-    
+
     for (int i = 0; i < imagem.altura; i++){
         free(imagem.mat[i]);
-    }  
+    }   
     free(imagem.mat);
 }
