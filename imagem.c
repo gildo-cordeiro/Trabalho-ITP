@@ -13,17 +13,17 @@ PPM lerArquivo(){
 
     PPM imagem;
 
-    fscanf(arquivo, "image %d %d\n", &imagem.altura, &imagem.largura);
+    fscanf(arquivo, "image %d %d\n", &imagem.largura, &imagem.altura);
 
-    for (int i = 0; i < imagem.altura; i++){
-        for (int j = 0; j < imagem.largura; j++){
+    for (int i = 0; i < imagem.largura; i++){
+        for (int j = 0; j < imagem.altura; j++){
             fscanf(arquivo,"color %d %d %d\n",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);
         }        
     }
      
-    imagem.mat = (Pixel**)malloc(imagem.altura * sizeof(Pixel*));    
-    for (int i = 0; i < imagem.altura; i++){
-        imagem.mat[i] = (Pixel*)malloc(imagem.largura * sizeof(Pixel));
+    imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
+    for (int i = 0; i < imagem.largura; i++){
+        imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
     }
     fclose(arquivo);  
 
@@ -38,8 +38,8 @@ void gerarImagem(PPM imagem){
     }
 
     fprintf(arquivo,"P3\n%d %d\n255\n", imagem.altura, imagem.largura);
-    for (int i = 0; i < imagem.altura; i++){
-        for (int j = 0; j < imagem.largura; j++){
+    for (int i = 0; i < imagem.largura; i++){
+        for (int j = 0; j < imagem.altura; j++){
             if(imagem.mat[i][j].red == 0){
                 fprintf(arquivo,"%d %d %d\n", imagem.pixel.red, imagem.pixel.green, imagem.pixel.blue);
             }else{
