@@ -3,8 +3,8 @@
 
 typedef struct ponto{
 	int x, y;
-}ponto;
+}Ponto;
 
-ponto definirPonto(int x, int y);
+Ponto definirPonto(int x, int y);
 
 #endif

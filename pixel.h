@@ -3,8 +3,8 @@
 
 typedef struct pixel{
 	int red, green, blue;	
-}pixel;
+}Pixel;
 
-pixel corPixel(int red, int green, int blue);
+Pixel corPixel(int red, int green, int blue);
 
 #endif

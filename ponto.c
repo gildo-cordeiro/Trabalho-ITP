@@ -1,7 +1,7 @@
 #include "ponto.h"
 
-ponto definirPonto(int x, int y){
-    ponto p;
+Ponto definirPonto(int x, int y){
+    Ponto p;
     p.x = x;
     p.y = y;
     return p;
