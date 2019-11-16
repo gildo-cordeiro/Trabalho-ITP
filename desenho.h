@@ -115,3 +115,21 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
     return imagem;
 }
 
+PPM desenharTriangulo(Ponto p1, Ponto p2, Ponto p3, PPM imagem){
+    PPM image1, image2, image3;
+    image1 = desenharLinha(p1, p2, imagem);
+    image2 = desenharLinha(p2, p3, image1);
+    image3 = desenharLinha(p3, p1, imagem);
+    return image3;
+}
+
+PPM desenharQuadrado(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem){
+    PPM image1, image2, image3, image4;
+    
+    image1 = desenharLinha(p1, p2, imagem);
+    image2 = desenharLinha(p2, p3, image1);
+    image3 = desenharLinha(p3, p4, image2);
+    image4 = desenharLinha(p4, p1, image3);
+    return image4;
+}
+
