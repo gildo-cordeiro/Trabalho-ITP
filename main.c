@@ -50,15 +50,15 @@ int main(int argc, char const *argv[]){
 		//essa merda desse quadrado não sai
 	}else if (c == 'Q') {
 		Ponto p1, p2, p3, p4;	
-		int x1, x2, z1,w1, y1, y2, z2, w2;
+		int x1, x2, x3, x4, y1, y2, y3, y4;
 
-		printf("Informe a linha na forma X1, Y1, X2 e Y2:\n");
-		scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &z1, &z2, &w1, &w2);
+		printf("Informe a linha na forma X1, Y1, X2, Y2, X3, Y3, X4 e Y4:\n");
+		scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
 
 		p1 = definirPonto(x1, y1);
 		p2 = definirPonto(x2, y2);
-		p3 = definirPonto(z1, z2);
-		p4 = definirPonto(w1, w2);
+		p3 = definirPonto(x3, y3);
+		p4 = definirPonto(x4, y4);
 
 		PPM imagem = desenharQuadrado(p1, p2, p3, p4, lerArquivo());
 		gerarImagem(imagem);
