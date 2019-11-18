@@ -22,7 +22,7 @@ int main(int argc, char const *argv[]){
 		gerarImagem(imagem);
 		
 	}else if (c == 'L') {
-		Ponto p1, p2;	
+		Ponto p1, p2;
 		int x1,x2,y1,y2;
 
 		printf("Informe a linha na forma X1, Y1, X2 e Y2:\n");
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[]){
 		Ponto p1, p2, p3;	
 		int x1, x2, x3, y1, y2, y3;
 
-		printf("Informe a linha na forma X1, Y1, X2 e Y2:\n");
+		printf("Informe o triangulo na forma X1, Y1, X2, Y2, X3 e Y3:\n");
 		scanf("%d %d %d %d %d %d",&x1,&y1,&x3, &x2, &y2, &y3);
 
 		p1 = definirPonto(x1, y1);
@@ -52,7 +52,7 @@ int main(int argc, char const *argv[]){
 		Ponto p1, p2, p3, p4;	
 		int x1, x2, x3, x4, y1, y2, y3, y4;
 
-		printf("Informe a linha na forma X1, Y1, X2, Y2, X3, Y3, X4 e Y4:\n");
+		printf("Informe a quadrado na forma X1, Y1, X2, Y2, X3, Y3, X4 e Y4:\n");
 		scanf("%d %d %d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3, &x4, &y4);
 
 		p1 = definirPonto(x1, y1);

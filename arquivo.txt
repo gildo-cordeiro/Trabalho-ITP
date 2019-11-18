@@ -1,4 +1,5 @@
 image 600 400
 color 100 170 200
+
 save arquivo.ppm
 

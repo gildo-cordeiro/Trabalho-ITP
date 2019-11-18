@@ -12,7 +12,15 @@ int sign(int x){
     }
     return 0; 
 }
-
+/**
+ * Funcao: DesenharPonto
+ * Parametros: 
+ *  - imagem: matriz que possue as propriedades que foram lidas no arquivo externo; 
+ *  - p: objeto do tipo ponto com as coordenadas (x,y) que o ponto possuira na matriz;
+ * Retorno: valor da nova matriz que possue um ponto desenhado
+ * descrição: funçaõ para desenhar um ponto e retorna um objeto do tiṕo imagem
+ * 
+ * */
 PPM desenharPonto(PPM imagem, Ponto p){
     for (int i = 0; i < imagem.largura; i++){
         for (int j = 0; j < imagem.altura; j++){
@@ -25,6 +33,13 @@ PPM desenharPonto(PPM imagem, Ponto p){
     }    
     return imagem;
 }
+/**
+ * Função: desenharLinha
+ * Parametros: 
+ *  - ponto1: recebe o primeiro com suas coordenadas x e y;
+ *  - ponto2: recebe o segundo ponto com suas coordenadas x e y;
+ *  - imagem: matriz que possue as propriedades que foram lidas no arquivo externo;
+ * */
 PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
     /**
      * Recebendo 2 pontos para saber o tamanho da linha
@@ -32,28 +47,25 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
      * */
     int dx = ponto2.x - ponto1.x;
     int dy = ponto2.y - ponto1.y;
-    int inclinacao=0;  
+    int modulo = 0;  
 
     if(dx < 0){// caso ponto final < ponto inicial
-        //recursão
         desenharLinha(ponto2, ponto1, imagem);
-        imagem.mat[ponto1.x][ponto1.y] = corPixel(255,255,255);
         return imagem;
     }
     //inclinição da reta de acordo com o eixo y
     if(dy < 0)
-        inclinacao = -1;
+        modulo = -1;
     else
-        inclinacao = 1;
+        modulo = 1;
 
     //variaveis auxiliares
-    int incE, incNE, d;
+    int d;
 
     //objeto pixel do tipo ponto e instanciando como ponto inicial
     Ponto pixel = ponto1;
-    imagem.mat[ponto1.x][ponto1.y] = corPixel(255,255,255);
     
-    if(dx >= inclinacao*dy){
+    if(dx >= modulo*dy){
         if(dy < 0){// caso y2 < y1
             d = 2 * dy + dx;
             while(pixel.x < ponto2.x){
@@ -94,7 +106,7 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
                     pixel.x++;
                     pixel.y--;
                 }
-            imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
+                imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
             }
         }else{ // caso y1 < y2
             d = dy - 2 * dx;
@@ -119,7 +131,7 @@ PPM desenharTriangulo(Ponto p1, Ponto p2, Ponto p3, PPM imagem){
     PPM image1, image2, image3;
     image1 = desenharLinha(p1, p2, imagem);
     image2 = desenharLinha(p2, p3, image1);
-    image3 = desenharLinha(p3, p1, imagem);
+    image3 = desenharLinha(p3, p1, image2);
     return image3;
 }
 
