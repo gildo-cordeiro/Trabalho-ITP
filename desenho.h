@@ -45,10 +45,12 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
      * Recebendo 2 pontos para saber o tamanho da linha
      * Recebendo a imagem lida do arquivo txt externo e preenchendo sua  matriz com a linha
      * */
+    
     int dx = ponto2.x - ponto1.x;
     int dy = ponto2.y - ponto1.y;
     int modulo = 0;  
 
+    //printf("%d",dy);
     if(dx < 0){// caso ponto final < ponto inicial
         desenharLinha(ponto2, ponto1, imagem);
         return imagem;
@@ -64,7 +66,7 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
 
     //objeto pixel do tipo ponto e instanciando como ponto inicial
     Ponto pixel = ponto1;
-    
+    printf("%d",imagem.pixel.blue);
     if(dx >= modulo*dy){
         if(dy < 0){// caso y2 < y1
             d = 2 * dy + dx;
@@ -123,7 +125,7 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
             }
         }
     }
-    imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
+    //imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
     return imagem;
 }
 

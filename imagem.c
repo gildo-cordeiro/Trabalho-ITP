@@ -17,35 +17,29 @@ PPM lerArquivo(){
 
     while (fscanf(arquivo, "%s", comando) != EOF){
         if(strcmp(comando,"image") == 0){
-            fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura);
+            fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura);  
             
             imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
             for (int i = 0; i < imagem.largura; i++){
                 imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
-            }    
+            }  
 
         }else if(strcmp(comando,"color") == 0){
-            for (int i = 0; i < imagem.largura; i++){
-                for (int j = 0; j < imagem.altura; j++){
-                    fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);
-                }        
-            }
+            fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);  
 
-        }else if(strcmp(comando,"clear") == 0){
+        }else if(strcmp(comando,"clean") == 0){
             //implementar
         }else if(strcmp(comando,"line") == 0){
-            int a, b, c, d;
-            fscanf(arquivo, "%d %d %d %d", &a, &b, &c, &d);
-            printf("%d",a);
-            //imagem.ponto[0].x = a;
+            imagem.ponto = (Ponto*)malloc(9 * sizeof(Ponto));
+            fscanf(arquivo, "%d %d %d %d", &imagem.ponto[0].x, &imagem.ponto[0].y, &imagem.ponto[1].x, &imagem.ponto[1].y);
         
         }else if(strcmp(comando,"polygon") == 0){
-            fscanf(arquivo, "polygon %d %d %d %d %d %d %d %d\n",&imagem.ponto[2].x, &imagem.ponto[2].y,&imagem.ponto[3].x, &imagem.ponto[3].y, 
+            fscanf(arquivo, "%d %d %d %d %d %d %d %d\n",&imagem.ponto[2].x, &imagem.ponto[2].y,&imagem.ponto[3].x, &imagem.ponto[3].y, 
                 &imagem.ponto[4].x, &imagem.ponto[4].y,
                 &imagem.ponto[5].x, &imagem.ponto[5].y);
         }
     }    
-    //printf("%d",imagem.ponto[0].x);
+    
     fclose(arquivo);  
 
     return imagem;

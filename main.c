@@ -22,13 +22,12 @@ int main(int argc, char const *argv[]){
 		gerarImagem(imagem);
 		
 	}else if (c == 'L') {
-		/*Ponto p1, p2;
+		Ponto p1, p2;
 		p1 = definirPonto(lerArquivo().ponto[0].x, lerArquivo().ponto[0].y);
 		p2 = definirPonto(lerArquivo().ponto[1].x, lerArquivo().ponto[1].y);
 
 		PPM imagem = desenharLinha(p1, p2, lerArquivo());
-		gerarImagem(imagem);*/
-		lerArquivo();
+		gerarImagem(imagem);
 	}else if (c == 'T') {
 		Ponto p1, p2, p3;	
 		int x1, x2, x3, y1, y2, y3;
