@@ -20,6 +20,8 @@ PPM lerArquivo(){
             fscanf(arquivo,"color %d %d %d\n",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);
         }        
     }
+
+    fscanf(arquivo, "line %d %d %d %d\n", &imagem., &imagem.altura);
      
     imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
     for (int i = 0; i < imagem.largura; i++){

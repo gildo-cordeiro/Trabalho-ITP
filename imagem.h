@@ -2,11 +2,12 @@
 #define IMAGEM_H
 
 #include "pixel.h"
+#include "linha.h"
 
 typedef struct imagem{
-	int largura;
-	int altura;
-	Pixel pixel;
+	int largura, altura;	
+	Pixel pixel, clear;
+	Linha linha;
 	Pixel **mat;
 }PPM;
 
