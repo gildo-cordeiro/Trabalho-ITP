@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "imagem.h"
 #include "pixel.h"
 #include "ponto.h"
@@ -12,21 +13,39 @@ PPM lerArquivo(){
     }
 
     PPM imagem;
+    char comando[10];
 
-    fscanf(arquivo, "image %d %d\n", &imagem.largura, &imagem.altura);
+    while (fscanf(arquivo, "%s", comando) != EOF){
+        if(strcmp(comando,"image") == 0){
+            fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura);
+            
+            imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
+            for (int i = 0; i < imagem.largura; i++){
+                imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
+            }    
 
-    for (int i = 0; i < imagem.largura; i++){
-        for (int j = 0; j < imagem.altura; j++){
-            fscanf(arquivo,"color %d %d %d\n",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);
-        }        
-    }
+        }else if(strcmp(comando,"color") == 0){
+            for (int i = 0; i < imagem.largura; i++){
+                for (int j = 0; j < imagem.altura; j++){
+                    fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);
+                }        
+            }
 
-    fscanf(arquivo, "line %d %d %d %d\n", &imagem., &imagem.altura);
-     
-    imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
-    for (int i = 0; i < imagem.largura; i++){
-        imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
-    }
+        }else if(strcmp(comando,"clear") == 0){
+            //implementar
+        }else if(strcmp(comando,"line") == 0){
+            int a, b, c, d;
+            fscanf(arquivo, "%d %d %d %d", &a, &b, &c, &d);
+            printf("%d",a);
+            //imagem.ponto[0].x = a;
+        
+        }else if(strcmp(comando,"polygon") == 0){
+            fscanf(arquivo, "polygon %d %d %d %d %d %d %d %d\n",&imagem.ponto[2].x, &imagem.ponto[2].y,&imagem.ponto[3].x, &imagem.ponto[3].y, 
+                &imagem.ponto[4].x, &imagem.ponto[4].y,
+                &imagem.ponto[5].x, &imagem.ponto[5].y);
+        }
+    }    
+    //printf("%d",imagem.ponto[0].x);
     fclose(arquivo);  
 
     return imagem;
@@ -55,4 +74,6 @@ void gerarImagem(PPM imagem){
         free(imagem.mat[i]);
     }   
     free(imagem.mat);
+
+    free(imagem.ponto);
 }

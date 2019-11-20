@@ -22,13 +22,17 @@ int main(int argc, char const *argv[]){
 		gerarImagem(imagem);
 		
 	}else if (c == 'L') {
-		/*Ponto p1, p2;
-		p1 = definirPonto(lerArquivo().ponto[0].x, lerArquivo().ponto[0].y);
-		p2 = definirPonto(lerArquivo().ponto[1].x, lerArquivo().ponto[1].y);
+		Ponto p1, p2;
+		int x1,x2,y1,y2;
+
+		printf("Informe a linha na forma X1, Y1, X2 e Y2:\n");
+		scanf("%d %d %d %d",&x1,&y1, &x2, &y2);
+
+		p1 = definirPonto(x1, y1);
+		p2 = definirPonto(x2, y2);
 
 		PPM imagem = desenharLinha(p1, p2, lerArquivo());
-		gerarImagem(imagem);*/
-		lerArquivo();
+		gerarImagem(imagem);
 	}else if (c == 'T') {
 		Ponto p1, p2, p3;	
 		int x1, x2, x3, y1, y2, y3;
