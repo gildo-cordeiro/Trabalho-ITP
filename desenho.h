@@ -66,7 +66,7 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
 
     //objeto pixel do tipo ponto e instanciando como ponto inicial
     Ponto pixel = ponto1;
-    printf("%d",imagem.pixel.blue);
+    //printf("%d",imagem.pixel.blue);
     if(dx >= modulo*dy){
         if(dy < 0){// caso y2 < y1
             d = 2 * dy + dx;
@@ -125,7 +125,7 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
             }
         }
     }
-    //imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
+    imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
     return imagem;
 }
 
@@ -137,7 +137,7 @@ PPM desenharTriangulo(Ponto p1, Ponto p2, Ponto p3, PPM imagem){
     return image3;
 }
 
-PPM desenharQuadrado(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem){
+PPM desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem){
     PPM image1, image2, image3, image4;
     
     image1 = desenharLinha(p1, p2, imagem);

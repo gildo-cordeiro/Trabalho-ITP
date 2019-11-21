@@ -5,7 +5,8 @@
 #include "ponto.h"
 
 typedef struct imagem{
-	int largura, altura;	
+	int largura, altura;
+	char *save;	
 	Pixel pixel;
 	Pixel **mat;
 	Ponto *ponto;

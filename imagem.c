@@ -17,15 +17,10 @@ PPM lerArquivo(){
 
     while (fscanf(arquivo, "%s", comando) != EOF){
         if(strcmp(comando,"image") == 0){
-            fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura);  
-            
-            imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
-            for (int i = 0; i < imagem.largura; i++){
-                imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
-            }  
+            fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura); 
 
         }else if(strcmp(comando,"color") == 0){
-            fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);  
+            fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);   
 
         }else if(strcmp(comando,"clean") == 0){
             //implementar
@@ -37,8 +32,16 @@ PPM lerArquivo(){
             fscanf(arquivo, "%d %d %d %d %d %d %d %d\n",&imagem.ponto[2].x, &imagem.ponto[2].y,&imagem.ponto[3].x, &imagem.ponto[3].y, 
                 &imagem.ponto[4].x, &imagem.ponto[4].y,
                 &imagem.ponto[5].x, &imagem.ponto[5].y);
+
+        }else if(strcmp(comando,"save") == 0){
+            imagem.save = (char*)malloc(11 * sizeof(char));
+            fscanf(arquivo, "%s", imagem.save);
         }
     }    
+    imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
+    for (int i = 0; i < imagem.largura; i++){
+        imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
+    }
     
     fclose(arquivo);  
 
@@ -46,7 +49,7 @@ PPM lerArquivo(){
 }
 
 void gerarImagem(PPM imagem){
-    FILE *arquivo = fopen("arquivo.ppm","w");
+    FILE *arquivo = fopen(imagem.save,"w");
     if (arquivo == NULL){
         printf("Erro ao criar arquivo");
         exit(1);
@@ -62,12 +65,11 @@ void gerarImagem(PPM imagem){
             }
         }        
     }
+    
     fclose(arquivo);
 
     for (int i = 0; i < imagem.altura; i++){
         free(imagem.mat[i]);
     }   
     free(imagem.mat);
-
-    free(imagem.ponto);
 }
