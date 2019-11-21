@@ -44,8 +44,10 @@ int main(int argc, char const *argv[]){
 
 		}else if(strcmp(comando,"fill") == 0){
 			Ponto p1;
-			preencherForma(imagem.mat[100][100], lerArquivo());
-			i=1;
+			imagem = preencherForma(definirPonto(150,150), imagem);
+
+			printf("%d",imagem.mat[151][151].red);
+			
 		}else if(strcmp(comando,"save") == 0){
 			gerarImagem(imagem);
 			i = 1;
