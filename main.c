@@ -21,6 +21,13 @@ int main(int argc, char const *argv[]){
 			//implementar
 		}else if(strcmp(comando,"clear")==0){
 			//implementar
+		}else if(strcmp(comando,"line")==0){
+			Ponto p1, p2;
+			p1 = definirPonto(lerArquivo().ponto[0].x, lerArquivo().ponto[0].y);
+			p2 = definirPonto(lerArquivo().ponto[1].x, lerArquivo().ponto[1].y);
+
+			imagem = desenharLinha(p1, p2, lerArquivo());
+
 		}else if(strcmp(comando,"rect")==0){
 			//reutilizar a função do poligono (adaptada)
 		}else if(strcmp(comando,"circle")==0){
@@ -36,19 +43,21 @@ int main(int argc, char const *argv[]){
 			imagem = desenharPoligono(p1, p2, p3, p4, lerArquivo());
 
 		}else if(strcmp(comando,"fill") == 0){
-			//implementar
+			Ponto p1;
+			preencherForma(imagem.mat[100][100], lerArquivo());
+			i=1;
 		}else if(strcmp(comando,"save") == 0){
 			gerarImagem(imagem);
 			i = 1;
 		}else if(strcmp(comando,"open") == 0){
 			if(lerArquivo().save != NULL){
-				printf("Arquivo carregado");
+				printf("Arquivo carregado\n");
 			}else{
-				printf("Erro ao carregar arquivo");
+				printf("Erro ao carregar arquivo\n");
 			}
 			i = 1;
 		}else{
-			printf("comando invalido");
+			printf("comando invalido\n");
 		}
 	}
 	
@@ -66,12 +75,7 @@ int main(int argc, char const *argv[]){
 		gerarImagem(imagem);
 		
 	}else if (c == 'L') {
-		Ponto p1, p2;
-		p1 = definirPonto(lerArquivo().ponto[0].x, lerArquivo().ponto[0].y);
-		p2 = definirPonto(lerArquivo().ponto[1].x, lerArquivo().ponto[1].y);
-
-		PPM imagem = desenharLinha(p1, p2, lerArquivo());
-		gerarImagem(imagem);
+		
 	}else if (c == 'T') {
 		Ponto p1, p2, p3;	
 		int x1, x2, x3, y1, y2, y3;

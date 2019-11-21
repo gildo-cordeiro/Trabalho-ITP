@@ -22,15 +22,15 @@ int sign(int x){
  * 
  * */
 PPM desenharPonto(PPM imagem, Ponto p){
-    for (int i = 0; i < imagem.largura; i++){
-        for (int j = 0; j < imagem.altura; j++){
+    for (int i = 0; i < imagem.altura; i++){
+        for (int j = 0; j < imagem.largura; j++){
             if ((p.x == i && p.y == j) && (p.x < imagem.altura && p.y < imagem.largura)){
                 imagem.mat[i][j] = corPixel(255,255,255);
             }else{
                 imagem.mat[i][j] = corPixel(imagem.pixel.red,imagem.pixel.green, imagem.pixel.blue);
             }           
         }        
-    }    
+    } 
     return imagem;
 }
 /**
@@ -145,5 +145,11 @@ PPM desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem){
     image3 = desenharLinha(p3, p4, image2);
     image4 = desenharLinha(p1, p4, image3);
     return image4;
+}
+
+void preencherForma(Pixel p, PPM imagem){
+    printf("%d",getCor(p).red);
+    
+    //return imagem;
 }
 

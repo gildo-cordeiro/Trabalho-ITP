@@ -19,13 +19,19 @@ PPM lerArquivo(){
         if(strcmp(comando,"image") == 0){
             fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura); 
 
+            imagem.ponto = (Ponto*)malloc(6 * sizeof(Ponto));
+            
+            imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
+            for (int i = 0; i < imagem.largura; i++){
+                imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
+            }
+
         }else if(strcmp(comando,"color") == 0){
             fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);   
 
         }else if(strcmp(comando,"clean") == 0){
             //implementar
         }else if(strcmp(comando,"line") == 0){
-            imagem.ponto = (Ponto*)malloc(9 * sizeof(Ponto));
             fscanf(arquivo, "%d %d %d %d", &imagem.ponto[0].x, &imagem.ponto[0].y, &imagem.ponto[1].x, &imagem.ponto[1].y);
         
         }else if(strcmp(comando,"polygon") == 0){
@@ -33,15 +39,13 @@ PPM lerArquivo(){
                 &imagem.ponto[4].x, &imagem.ponto[4].y,
                 &imagem.ponto[5].x, &imagem.ponto[5].y);
 
+        }else if(strcmp(comando,"fill") == 0){
+            //implementar        
         }else if(strcmp(comando,"save") == 0){
             imagem.save = (char*)malloc(11 * sizeof(char));
             fscanf(arquivo, "%s", imagem.save);
         }
-    }    
-    imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
-    for (int i = 0; i < imagem.largura; i++){
-        imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
-    }
+    }       
     
     fclose(arquivo);  
 
@@ -68,8 +72,11 @@ void gerarImagem(PPM imagem){
     
     fclose(arquivo);
 
-    for (int i = 0; i < imagem.altura; i++){
+    for (int i = 0; i < imagem.largura; i++){
         free(imagem.mat[i]);
     }   
     free(imagem.mat);
+
+    free(imagem.ponto);
+    free(imagem.save);
 }
