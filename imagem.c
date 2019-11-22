@@ -35,7 +35,7 @@ PPM lerArquivo(){
             fscanf(arquivo, "%d %d %d %d", &imagem.ponto[0].x, &imagem.ponto[0].y, &imagem.ponto[1].x, &imagem.ponto[1].y);
         
         }else if(strcmp(comando,"polygon") == 0){
-            fscanf(arquivo, "%d %d %d %d %d %d %d %d\n",&imagem.ponto[2].x, &imagem.ponto[2].y,&imagem.ponto[3].x, &imagem.ponto[3].y, 
+            fscanf(arquivo, "%d %d %d %d %d %d %d %d",&imagem.ponto[2].x, &imagem.ponto[2].y,&imagem.ponto[3].x, &imagem.ponto[3].y, 
                 &imagem.ponto[4].x, &imagem.ponto[4].y,
                 &imagem.ponto[5].x, &imagem.ponto[5].y);
 
@@ -47,8 +47,14 @@ PPM lerArquivo(){
         }
     }       
     
-    fclose(arquivo);  
-
+    for (int i = 0; i < imagem.largura; i++){
+        for (int j = 0; j < imagem.altura; j++){
+            imagem.mat[i][j].red = imagem.pixel.red;
+            imagem.mat[i][j].green = imagem.pixel.green;
+            imagem.mat[i][j].blue = imagem.pixel.blue;
+        }        
+    }    
+    fclose(arquivo);
     return imagem;
 }
 
@@ -58,15 +64,12 @@ void gerarImagem(PPM imagem){
         printf("Erro ao criar arquivo");
         exit(1);
     }
+    printf("gerar %d", imagem.mat[151][151].red);
 
     fprintf(arquivo,"P3\n%d %d\n255\n", imagem.altura, imagem.largura);
     for (int i = 0; i < imagem.largura; i++){
         for (int j = 0; j < imagem.altura; j++){
-            if(imagem.mat[i][j].red == 0){
-                fprintf(arquivo,"%d %d %d\n", imagem.pixel.red, imagem.pixel.green, imagem.pixel.blue);
-            }else{
-                fprintf(arquivo,"%d %d %d\n", imagem.mat[i][j].red, imagem.mat[i][j].green, imagem.mat[i][j].blue);
-            }
+            fprintf(arquivo,"%d %d %d\n", imagem.mat[i][j].red, imagem.mat[i][j].green, imagem.mat[i][j].blue);
         }        
     }
     
@@ -76,7 +79,6 @@ void gerarImagem(PPM imagem){
         free(imagem.mat[i]);
     }   
     free(imagem.mat);
-
     free(imagem.ponto);
     free(imagem.save);
 }

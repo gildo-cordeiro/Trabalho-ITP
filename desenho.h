@@ -148,12 +148,20 @@ PPM desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem){
 }
 
 PPM preencherForma(Ponto p, PPM imagem){
-    printf("%d",imagem.mat[p.x++][p.y++].red);
-    if(Equals(getCor(imagem.mat[p.x++][p.y++]), getCor(corPixel(0,0,0))) == 1){
-        imagem.pixel.red = 170;
-        imagem.pixel.green = 150;
-        imagem.pixel.blue = 200;
-    }   
+    printf("%d\n",imagem.mat[p.x][p.y].red);
+    if(abs(p.x) < imagem.largura && abs(p.y) < imagem.altura){
+        for (int i = 0; i < imagem.largura; i++){
+            for (int j = 0; j < imagem.altura; j++){
+                if(Equals(getCor(imagem.mat[i][j]), getCor(corPixel(255, 255, 255))) != 1){
+                    imagem.mat[i][j] = corPixel(255, 0, 0); 
+                }else{
+                    if(Equals(getCor(imagem.mat[i][j]), getCor(corPixel(255, 255, 255))) == 1){
+                        imagem.mat[i+1][j+1] = corPixel(100, 170, 200);
+                    }                    
+                }
+            }            
+        }        
+    } 
     return imagem;
 }
 
