@@ -12,8 +12,8 @@ typedef struct imagem{
 	Ponto *ponto;
 }PPM;
 
-PPM lerArquivo();
+void lerArquivo();
 
-void gerarImagem(PPM imagem);
+void gerarImagem();
 
 #endif

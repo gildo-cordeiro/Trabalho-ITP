@@ -4,17 +4,25 @@
 #include "string.h"
 
 int main(int argc, char const *argv[]){
-
-	char comando[7];
+	lerArquivo();
+	Ponto p1, p2;
 	PPM imagem;
-	int i = 0;
+	p1 = definirPonto(350, 10);
+	p2 = definirPonto(200, 10);
+	
+	preencherForma(definirPonto(101, 50), corPixel(255,0,0));
+	desenharLinha(p1, p2);
+	desenharPoligono(definirPonto(100,100), definirPonto(100,200), definirPonto(0,200), definirPonto(0,100));
+	gerarImagem();
+
+	
+	/*
 	while (i != 1){		
 		printf("Informe o comando\n");
 		scanf("%s",comando);
 		printf("\n");
 
 		if (strcmp(comando,"image")==0){
-			gerarImagem(lerArquivo());
 			printf("imagem gerada com sucesso\n");
 			i = 1;
 		}else if(strcmp(comando,"color")==0){
@@ -22,11 +30,8 @@ int main(int argc, char const *argv[]){
 		}else if(strcmp(comando,"clear")==0){
 			//implementar
 		}else if(strcmp(comando,"line")==0){
-			Ponto p1, p2;
-			p1 = definirPonto(lerArquivo().ponto[0].x, lerArquivo().ponto[0].y);
-			p2 = definirPonto(lerArquivo().ponto[1].x, lerArquivo().ponto[1].y);
-
-			imagem = desenharLinha(p1, p2, lerArquivo());
+			
+			i = 1;
 
 		}else if(strcmp(comando,"rect")==0){
 			//reutilizar a função do poligono (adaptada)
@@ -34,24 +39,25 @@ int main(int argc, char const *argv[]){
 			//implementar
 		}else if(strcmp(comando,"polygon")==0){
 			Ponto p1, p2, p3, p4;	
+			PPM image;
 
-			p1 = definirPonto(lerArquivo().ponto[2].x, lerArquivo().ponto[2].y);
-			p2 = definirPonto(lerArquivo().ponto[3].x, lerArquivo().ponto[3].y);
-			p3 = definirPonto(lerArquivo().ponto[4].x, lerArquivo().ponto[4].y);
-			p4 = definirPonto(lerArquivo().ponto[5].x, lerArquivo().ponto[5].y);
+			p1 = definirPonto(image.ponto[2].x, image.ponto[2].y);
+			p2 = definirPonto(image.ponto[3].x, image.ponto[3].y);
+			p3 = definirPonto(image.ponto[4].x, image.ponto[4].y);
+			p4 = definirPonto(image.ponto[5].x, image.ponto[5].y);
 
-			imagem = desenharPoligono(p1, p2, p3, p4, lerArquivo());
+			desenharPoligono(p1, p2, p3, p4);
 
 		}else if(strcmp(comando,"fill") == 0){
 			Ponto p1;
-			imagem = preencherForma(definirPonto(0,0), imagem);
-			//printf("soda %d\n",imagem.mat[151][151].red);
-			//i = 1;
+			preencherForma(definirPonto(150,150), corPixel(255,0,0), imagem);
+			printf("t\n");
+			i = 1;
 		}else if(strcmp(comando,"save") == 0){
 			gerarImagem(imagem);
 			i = 1;
 		}else if(strcmp(comando,"open") == 0){
-			if(lerArquivo().save != NULL){
+			if(imagem.save != NULL){
 				printf("Arquivo carregado\n");
 			}else{
 				printf("Erro ao carregar arquivo\n");
@@ -60,7 +66,7 @@ int main(int argc, char const *argv[]){
 		}else{
 			printf("comando invalido\n");
 		}
-	}
+	}*/
 	
 	
 

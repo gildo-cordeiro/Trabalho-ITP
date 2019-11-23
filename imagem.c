@@ -5,14 +5,13 @@
 #include "pixel.h"
 #include "ponto.h"
 
-PPM lerArquivo(){  
+PPM imagem;
+void lerArquivo(){  
     FILE *arquivo = fopen("arquivo.txt","r");
     if (arquivo == NULL){
         printf("Erro ao abrir arquivo");
         exit(1);
     }
-
-    PPM imagem;
     char comando[10];
 
     while (fscanf(arquivo, "%s", comando) != EOF){
@@ -46,7 +45,6 @@ PPM lerArquivo(){
             fscanf(arquivo, "%s", imagem.save);
         }
     }       
-    
     for (int i = 0; i < imagem.largura; i++){
         for (int j = 0; j < imagem.altura; j++){
             imagem.mat[i][j].red = imagem.pixel.red;
@@ -55,16 +53,14 @@ PPM lerArquivo(){
         }        
     }    
     fclose(arquivo);
-    return imagem;
 }
 
-void gerarImagem(PPM imagem){
+void gerarImagem(){
     FILE *arquivo = fopen(imagem.save,"w");
     if (arquivo == NULL){
         printf("Erro ao criar arquivo");
         exit(1);
     }
-    printf("gerar %d", imagem.mat[151][151].red);
 
     fprintf(arquivo,"P3\n%d %d\n255\n", imagem.altura, imagem.largura);
     for (int i = 0; i < imagem.largura; i++){
@@ -74,7 +70,6 @@ void gerarImagem(PPM imagem){
     }
     
     fclose(arquivo);
-
     for (int i = 0; i < imagem.largura; i++){
         free(imagem.mat[i]);
     }   

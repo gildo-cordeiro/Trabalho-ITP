@@ -3,6 +3,7 @@
 #include "imagem.h"
 #include "pixel.h"
 #include "ponto.h"
+#include <math.h>
 
 int sign(int x){
     if (x > 0){
@@ -12,27 +13,7 @@ int sign(int x){
     }
     return 0; 
 }
-/**
- * Funcao: DesenharPonto
- * Parametros: 
- *  - imagem: matriz que possue as propriedades que foram lidas no arquivo externo; 
- *  - p: objeto do tipo ponto com as coordenadas (x,y) que o ponto possuira na matriz;
- * Retorno: valor da nova matriz que possue um ponto desenhado
- * descrição: funçaõ para desenhar um ponto e retorna um objeto do tiṕo imagem
- * 
- * */
-PPM desenharPonto(PPM imagem, Ponto p){
-    for (int i = 0; i < imagem.altura; i++){
-        for (int j = 0; j < imagem.largura; j++){
-            if ((p.x == i && p.y == j) && (p.x < imagem.altura && p.y < imagem.largura)){
-                imagem.mat[i][j] = corPixel(255,255,255);
-            }else{
-                imagem.mat[i][j] = corPixel(imagem.pixel.red,imagem.pixel.green, imagem.pixel.blue);
-            }           
-        }        
-    } 
-    return imagem;
-}
+PPM imagem;
 /**
  * Função: desenharLinha
  * Parametros: 
@@ -40,34 +21,62 @@ PPM desenharPonto(PPM imagem, Ponto p){
  *  - ponto2: recebe o segundo ponto com suas coordenadas x e y;
  *  - imagem: matriz que possue as propriedades que foram lidas no arquivo externo;
  * */
-PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
+void desenharLinha(Ponto ponto1, Ponto ponto2){
+
     /**
      * Recebendo 2 pontos para saber o tamanho da linha
      * Recebendo a imagem lida do arquivo txt externo e preenchendo sua  matriz com a linha
-     * */
-    
-    int dx = ponto2.x - ponto1.x;
-    int dy = ponto2.y - ponto1.y;
-    int modulo = 0;  
+     * */    
+    int dx, dy, x, y, d, s1, s2, swap=0, temp;
 
-    //printf("%d",dy);
-    if(dx < 0){// caso ponto final < ponto inicial
-        desenharLinha(ponto2, ponto1, imagem);
-        return imagem;
+    dx = abs(ponto2.x - ponto1.x);
+    dy = abs(ponto2.y - ponto1.y);  
+    s1 = sign(ponto2.x - ponto1.x);
+    s2 = sign(ponto2.y - ponto1.y);
+
+    if(dy > dx){
+        temp = dx; 
+        dx = dy; 
+        dy = temp; 
+        swap = 1;
     }
-    //inclinição da reta de acordo com o eixo y
-    if(dy < 0)
-        modulo = -1;
-    else
-        modulo = 1;
-
+    //printf("%d",dy);
+    /*if(dx < 0){// caso ponto final < ponto inicial
+        desenharLinha(ponto2, ponto1);
+        return ;
+    }*/
+    
     //variaveis auxiliares
-    int d;
+    d = 2 * dy - dx;
+    x = ponto1.x;
+    y = ponto1.y;
+
 
     //objeto pixel do tipo ponto e instanciando como ponto inicial
-    Ponto pixel = ponto1;
+    //Ponto pixel = ponto1;
     //printf("%d",imagem.pixel.blue);
-    if(dx >= modulo*dy){
+    //printf("%d",imagem.mat[0][0].red);
+    for(int i = 1; i <= dx; i++) {
+        imagem.mat[y][x] = corPixel(255,255,255);
+        //printf("x %d\n", x);
+        //printf("y %d\n", y);
+        
+        while(d >= 0) {
+        if(swap){
+            x = x + s1;
+        } else {
+            y = y + s2;
+            d = d - 2* dx;
+        }
+        }
+        if(swap) y = y + s2;
+        else x = x + s1;
+        d = d + 2 * dy;
+    }
+    imagem.mat[y][x] = corPixel(255,255,255);
+    /*
+    if(dx >= dy){
+        printf("Aqui");
         if(dy < 0){// caso y2 < y1
             d = 2 * dy + dx;
             while(pixel.x < ponto2.x){
@@ -125,43 +134,27 @@ PPM desenharLinha(Ponto ponto1, Ponto ponto2, PPM imagem){
             }
         }
     }
-    imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
-    return imagem;
+    imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);*/
 }
 
-PPM desenharTriangulo(Ponto p1, Ponto p2, Ponto p3, PPM imagem){
-    PPM image1, image2, image3;
-    image1 = desenharLinha(p1, p2, imagem);
-    image2 = desenharLinha(p2, p3, image1);
-    image3 = desenharLinha(p3, p1, image2);
-    return image3;
-}
-
-PPM desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem){
-    PPM image1, image2, image3, image4;
+void desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
+    desenharLinha(p1, p2);
+    desenharLinha(p2, p3);
+    desenharLinha(p3, p4);
+    desenharLinha(p1, p4);
     
-    image1 = desenharLinha(p1, p2, imagem);
-    image2 = desenharLinha(p2, p3, image1);
-    image3 = desenharLinha(p3, p4, image2);
-    image4 = desenharLinha(p1, p4, image3);
-    return image4;
 }
 
-PPM preencherForma(Ponto p, PPM imagem){
-    printf("%d\n",imagem.mat[p.x][p.y].red);
-    if(abs(p.x) < imagem.largura && abs(p.y) < imagem.altura){
-        for (int i = 0; i < imagem.largura; i++){
-            for (int j = 0; j < imagem.altura; j++){
-                if(Equals(getCor(imagem.mat[i][j]), getCor(corPixel(255, 255, 255))) != 1){
-                    imagem.mat[i][j] = corPixel(255, 0, 0); 
-                }else{
-                    if(Equals(getCor(imagem.mat[i][j]), getCor(corPixel(255, 255, 255))) == 1){
-                        imagem.mat[i+1][j+1] = corPixel(100, 170, 200);
-                    }                    
-                }
-            }            
+void preencherForma(Ponto p, Pixel newColor){    
+    if((p.x > imagem.altura || p.x < 0) && (p.y > imagem.largura || p.y < 0)){
+        return ;
+    }
+    if (Equals(imagem.mat[p.x+1][p.y], corPixel(100,170,200)) == 1){
+        while (Equals(imagem.mat[p.x][p.y], corPixel(255,255,255)) == 0){
+            imagem.mat[p.x][p.y] = newColor;
         }        
-    } 
-    return imagem;
+    }
+    
+
 }
 
