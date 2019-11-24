@@ -14,19 +14,17 @@ int sign(int x){
     return 0; 
 }
 PPM imagem;
+
 /**
  * Função: desenharLinha
  * Parametros: 
  *  - ponto1: recebe o primeiro com suas coordenadas x e y;
  *  - ponto2: recebe o segundo ponto com suas coordenadas x e y;
  *  - imagem: matriz que possue as propriedades que foram lidas no arquivo externo;
+ * Retorno: void
+ * Descrição: Função para desenhar uma linha com ponto inicial e final especificados na iamgem (matriz)
  * */
-void desenharLinha(Ponto ponto1, Ponto ponto2){
-
-    /**
-     * Recebendo 2 pontos para saber o tamanho da linha
-     * Recebendo a imagem lida do arquivo txt externo e preenchendo sua  matriz com a linha
-     * */    
+void desenharLinha(Ponto ponto1, Ponto ponto2){    
     int dx, dy, x, y, d, s1, s2, swap=0, temp;
 
     dx = abs(ponto2.x - ponto1.x);
@@ -40,22 +38,12 @@ void desenharLinha(Ponto ponto1, Ponto ponto2){
         dy = temp; 
         swap = 1;
     }
-    //printf("%d",dy);
-    /*if(dx < 0){// caso ponto final < ponto inicial
-        desenharLinha(ponto2, ponto1);
-        return ;
-    }*/
     
     //variaveis auxiliares
     d = 2 * dy - dx;
     x = ponto1.x;
     y = ponto1.y;
 
-
-    //objeto pixel do tipo ponto e instanciando como ponto inicial
-    //Ponto pixel = ponto1;
-    //printf("%d",imagem.pixel.blue);
-    //printf("%d",imagem.mat[0][0].red);
     for(int i = 1; i <= dx; i++) {
         imagem.mat[y][x] = corPixel(255,255,255);
         //printf("x %d\n", x);
@@ -74,69 +62,17 @@ void desenharLinha(Ponto ponto1, Ponto ponto2){
         d = d + 2 * dy;
     }
     imagem.mat[y][x] = corPixel(255,255,255);
-    /*
-    if(dx >= dy){
-        printf("Aqui");
-        if(dy < 0){// caso y2 < y1
-            d = 2 * dy + dx;
-            while(pixel.x < ponto2.x){
-                if(d < 0){
-                    d += 2*(dy+dx);
-                    pixel.x++;
-                    pixel.y--;
-                }else{
-                    d += 2 * dy;
-                    pixel.x++; // varia apenas no eixo x
-                }
-                imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
-            }
-        }else{ // caso y1 < y2
-            d = 2 * dy - dx;
-            while(pixel.x < ponto2.x){
-                if(d < 0){ // escolhido é o I
-                    d += 2 * dy;
-                    pixel.x++; // varia apenas no eixo x
-                }else{ // escolhido é o S
-                    d += 2 * (dy - dx);
-                    pixel.x++;
-                    pixel.y++;
-                }
-                imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
-            }
-        }
-    }else{
-        if(dy < 0){ // caso y2 < y1
-            d = dy + 2*dx;
-            while(pixel.y > ponto2.y){
-                if(d < 0){
-                    d += 2 * dx;
-                    pixel.y--; // varia apenas no eixo y
-                }
-                else{
-                    d += 2 * (dy + dx);
-                    pixel.x++;
-                    pixel.y--;
-                }
-                imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
-            }
-        }else{ // caso y1 < y2
-            d = dy - 2 * dx;
-            while(pixel.y < ponto2.y){
-                if(d < 0){
-                    d += 2 * (dy - dx);
-                    pixel.x++;
-                    pixel.y++;
-                }else{
-                    d += -2 * dx;
-                    pixel.y++; // varia apenas no eixo y
-                }
-                imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);
-            }
-        }
-    }
-    imagem.mat[pixel.x][pixel.y] = corPixel(255,255,255);*/
 }
-
+/**
+ * Função: desenharPloigono;
+ * Parametros: 
+ *  - p1: primeiro ponto do poligono;
+ *  - p2: segundo ponto do poligono;
+ *  - p3: terceiro ponto do poligono;
+ *  - p4: quarto ponto do poligono;
+ * Retorno: void
+ * Descrição: Função para desenhar um poligono com posições especificas na iamgem (matriz)
+ * */
 void desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
     desenharLinha(p1, p2);
     desenharLinha(p2, p3);
@@ -145,6 +81,16 @@ void desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
     
 }
 
+/**
+ * Função: preencherForma;
+ * Parametros: 
+ *  - y: posição y do ponto por onde iniciará o preenchimento de cor;
+ *  - x: posição x do ponto por onde iniciará o preenchimento de cor;
+ *  - newColor: nova cor que irá substituir a antiga cor;
+ * Retorno: void
+ * Descrição: Função para para preecher todo o espaço da imagem onde o ponto foi especificado. A função não deverá 
+ *  pintar dentro da figura caso o ponto especificado seja fora da mesma.
+ * */
 void preencherForma(int y, int x, Pixel newColor){  
     if((y < imagem.largura || y < imagem.altura) && (x < imagem.altura || x < imagem.largura)){    
         if (Equals(imagem.mat[y][x], corPixel(100,170,200)) == 1){
@@ -159,6 +105,15 @@ void preencherForma(int y, int x, Pixel newColor){
         }
     }
 }
+
+/**
+ * Função: circlePoints;
+ * Parametros: 
+ *  - p: ponto inicial por onde iniciará o desenho do circulo;
+ *  - color: cor da linha do circulo;
+ * Retorno: void
+ * Descrição: Função recursiva para incrementar as coordenadas x e y nas direções sul, norte, leste e oeste
+ **/
 void CirclePoints(Ponto p, Pixel color){
     imagem.mat[p.x][p.y] =  color;
     imagem.mat[p.x][-p.y] = color;
@@ -169,6 +124,14 @@ void CirclePoints(Ponto p, Pixel color){
     imagem.mat[-p.y][p.x] = color;
     imagem.mat[-p.y][-p.x] = color;
 }
+/**
+ * Função: desenharCirculo;
+ * Parametros: 
+ *  - radius: tamanho do raio do circulo;
+ *  - value: cor da linha do circulo;
+ * Retorno: void
+ * Descrição: Função para desenhar um circulo a partir do valor do raio especificado
+ * */
 void desenharCirculo(int radius, Pixel value){
     int x = 0;
     int y = radius;
@@ -182,7 +145,7 @@ void desenharCirculo(int radius, Pixel value){
             y--;
         }
     }
-    x;
+    x++;
     CirclePoints(definirPonto(x, y), value);
 }
 
