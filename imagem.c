@@ -44,15 +44,18 @@ void lerArquivo(){
             imagem.save = (char*)malloc(11 * sizeof(char));
             fscanf(arquivo, "%s", imagem.save);
         }
-    }       
+    }   
+
+    printf("%p",imagem.mat);
+    fclose(arquivo);
+    int a;
     for (int i = 0; i < imagem.largura; i++){
         for (int j = 0; j < imagem.altura; j++){
             imagem.mat[i][j].red = imagem.pixel.red;
             imagem.mat[i][j].green = imagem.pixel.green;
             imagem.mat[i][j].blue = imagem.pixel.blue;
         }        
-    }    
-    fclose(arquivo);
+    } 
 }
 
 void gerarImagem(){

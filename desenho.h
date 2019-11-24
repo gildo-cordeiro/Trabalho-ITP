@@ -145,16 +145,44 @@ void desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
     
 }
 
-void preencherForma(Ponto p, Pixel newColor){    
-    if((p.x > imagem.altura || p.x < 0) && (p.y > imagem.largura || p.y < 0)){
-        return ;
-    }
-    if (Equals(imagem.mat[p.x+1][p.y], corPixel(100,170,200)) == 1){
-        while (Equals(imagem.mat[p.x][p.y], corPixel(255,255,255)) == 0){
-            imagem.mat[p.x][p.y] = newColor;
-        }        
-    }
-    
+void preencherForma(int y, int x, Pixel newColor){  
+    if((y < imagem.largura || y < imagem.altura) && (x < imagem.altura || x < imagem.largura)){    
+        if (Equals(imagem.mat[y][x], corPixel(100,170,200)) == 1){
 
+            imagem.mat[y][x] = newColor;
+
+            preencherForma(y+1, x, corPixel(255,0,0));
+            preencherForma(y-1, x, corPixel(255,0,0));
+            preencherForma(y, x+1, corPixel(255,0,0));
+            preencherForma(y, x-1, corPixel(255,0,0));
+
+        }
+    }
+}
+void CirclePoints(Ponto p, Pixel color){
+    imagem.mat[p.x][p.y] =  color;
+    imagem.mat[p.x][-p.y] = color;
+    imagem.mat[-p.x][p.y] = color;
+    imagem.mat[-p.x][-p.y] = color;
+    imagem.mat[p.y][p.x] = color;
+    imagem.mat[p.y][-p.x] = color;
+    imagem.mat[-p.y][p.x] = color;
+    imagem.mat[-p.y][-p.x] = color;
+}
+void desenharCirculo(int radius, Pixel value){
+    int x = 0;
+    int y = radius;
+    int d = 1 - radius;
+    CirclePoints(definirPonto(x, y), value);
+    while(y > x) {
+        if (d < 0){
+            d += 2 * x + 3;
+        }else {
+            d += 2 * (x - y) + 5;
+            y--;
+        }
+    }
+    x;
+    CirclePoints(definirPonto(x, y), value);
 }
 

@@ -10,9 +10,10 @@ int main(int argc, char const *argv[]){
 	p1 = definirPonto(350, 10);
 	p2 = definirPonto(200, 10);
 	
-	preencherForma(definirPonto(101, 50), corPixel(255,0,0));
-	desenharLinha(p1, p2);
-	desenharPoligono(definirPonto(100,100), definirPonto(100,200), definirPonto(0,200), definirPonto(0,100));
+	//preencherForma(50, 50, corPixel(255,0,0));
+	//desenharLinha(p1, p2);
+	//desenharPoligono(definirPonto(100,100), definirPonto(100,200), definirPonto(0,200), definirPonto(0,100));
+	//desenharCirculo(50, corPixel(255,0,0));
 	gerarImagem();
 
 	
