@@ -12,18 +12,20 @@ void lerArquivo(){
         printf("Erro ao abrir arquivo");
         exit(1);
     }
+
+    PPM imagem;
+
     char comando[10];
 
     while (fscanf(arquivo, "%s", comando) != EOF){
         if(strcmp(comando,"image") == 0){
             fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura); 
 
-            imagem.ponto = (Ponto*)malloc(6 * sizeof(Ponto));
+            imagem.ponto = (Ponto*)malloc(10 * sizeof(Ponto));
             
             imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
             for (int i = 0; i < imagem.largura; i++){
                 imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
-            }
 
         }else if(strcmp(comando,"color") == 0){
             fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);   

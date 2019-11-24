@@ -27,11 +27,6 @@ PPM imagem;
 void desenharLinha(Ponto ponto1, Ponto ponto2){    
     int dx, dy, x, y, d, s1, s2, swap=0, temp;
 
-    dx = abs(ponto2.x - ponto1.x);
-    dy = abs(ponto2.y - ponto1.y);  
-    s1 = sign(ponto2.x - ponto1.x);
-    s2 = sign(ponto2.y - ponto1.y);
-
     if(dy > dx){
         temp = dx; 
         dx = dy; 
