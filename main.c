@@ -28,17 +28,6 @@ int main(int argc, char const *argv[]){
 		PPM imagem = desenharLinha(p1, p2, lerArquivo());
 		gerarImagem(imagem);
 
-	}else if (c == 'T'){
-
-		Ponto p1, p2, p3;	
-
-		p1 = definirPonto(lerArquivo().ponto[0].x, lerArquivo().ponto[0].y);
-		p2 = definirPonto(lerArquivo().ponto[1].x, lerArquivo().ponto[1].y);
-		p3 = definirPonto(lerArquivo().ponto[2].x, lerArquivo().ponto[2].y);
-
-		PPM imagem = desenharTriangulo(p1, p2, p3, lerArquivo());
-		gerarImagem(imagem);
-
 	}else if (c == 'Q'){
 
 		Ponto p1, p2, p3, p4;	
