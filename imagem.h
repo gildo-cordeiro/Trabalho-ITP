@@ -10,10 +10,14 @@ typedef struct imagem{
 	Pixel pixel;
 	Pixel **mat;
 	Ponto *ponto;
+	Pixel clean;
+	int raio;
 }PPM;
 
-void lerArquivo();
+PPM lerArquivo();
 
-void gerarImagem();
+void gerarImagem(PPM imagem);
+
+void verificarVertcesQuadrado(Ponto p1, Ponto p2, Ponto p3,  Pixel newColor);
 
 #endif

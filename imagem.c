@@ -5,33 +5,31 @@
 #include "pixel.h"
 #include "ponto.h"
 
-PPM imagem;
-void lerArquivo(){  
+PPM lerArquivo(){  
     FILE *arquivo = fopen("arquivo.txt","r");
     if (arquivo == NULL){
         printf("Erro ao abrir arquivo");
         exit(1);
     }
-
     PPM imagem;
-
     char comando[10];
 
     while (fscanf(arquivo, "%s", comando) != EOF){
         if(strcmp(comando,"image") == 0){
             fscanf(arquivo, "%d %d", &imagem.largura, &imagem.altura); 
 
-            imagem.ponto = (Ponto*)malloc(10 * sizeof(Ponto));
+            imagem.ponto = (Ponto*)malloc(8 * sizeof(Ponto));
             
-            imagem.mat = (Pixel**)malloc(imagem.largura * sizeof(Pixel*));    
-            for (int i = 0; i < imagem.largura; i++){
-                imagem.mat[i] = (Pixel*)malloc(imagem.altura * sizeof(Pixel));
+            imagem.mat = (Pixel**)malloc(imagem.altura * sizeof(Pixel*));    
+            for (int i = 0; i < imagem.altura; i++){
+                imagem.mat[i] = (Pixel*)malloc(imagem.largura * sizeof(Pixel));
+            }
 
         }else if(strcmp(comando,"color") == 0){
             fscanf(arquivo,"%d %d %d",&imagem.pixel.red, &imagem.pixel.green, &imagem.pixel.blue);   
 
         }else if(strcmp(comando,"clean") == 0){
-            //implementar
+            fscanf(arquivo, "%d %d %d", &imagem.clean.red, &imagem.clean.green, &imagem.clean.blue);
         }else if(strcmp(comando,"line") == 0){
             fscanf(arquivo, "%d %d %d %d", &imagem.ponto[0].x, &imagem.ponto[0].y, &imagem.ponto[1].x, &imagem.ponto[1].y);
         
@@ -41,41 +39,44 @@ void lerArquivo(){
                 &imagem.ponto[5].x, &imagem.ponto[5].y);
 
         }else if(strcmp(comando,"fill") == 0){
-            //implementar        
+            fscanf(arquivo, "%d %d", &imagem.ponto[6].x, &imagem.ponto[6].y); 
+        }else if(strcmp(comando,"circle") == 0){
+            fscanf(arquivo, "%d %d %d", &imagem.ponto[7].x, &imagem.ponto[7].y, &imagem.raio); 
+        
         }else if(strcmp(comando,"save") == 0){
             imagem.save = (char*)malloc(11 * sizeof(char));
             fscanf(arquivo, "%s", imagem.save);
         }
     }   
 
-    printf("%p",imagem.mat);
     fclose(arquivo);
     int a;
-    for (int i = 0; i < imagem.largura; i++){
-        for (int j = 0; j < imagem.altura; j++){
+    for (int i = 0; i < imagem.altura; i++){
+        for (int j = 0; j < imagem.largura; j++){
             imagem.mat[i][j].red = imagem.pixel.red;
             imagem.mat[i][j].green = imagem.pixel.green;
             imagem.mat[i][j].blue = imagem.pixel.blue;
         }        
-    } 
+    }
+    return imagem; 
 }
 
-void gerarImagem(){
+void gerarImagem(PPM imagem){
     FILE *arquivo = fopen(imagem.save,"w");
     if (arquivo == NULL){
         printf("Erro ao criar arquivo");
         exit(1);
     }
 
-    fprintf(arquivo,"P3\n%d %d\n255\n", imagem.altura, imagem.largura);
-    for (int i = 0; i < imagem.largura; i++){
-        for (int j = 0; j < imagem.altura; j++){
+    fprintf(arquivo,"P3\n%d %d\n255\n", imagem.largura, imagem.altura);
+    for (int i = 0; i < imagem.altura; i++){
+        for (int j = 0; j < imagem.largura; j++){
             fprintf(arquivo,"%d %d %d\n", imagem.mat[i][j].red, imagem.mat[i][j].green, imagem.mat[i][j].blue);
         }        
     }
     
     fclose(arquivo);
-    for (int i = 0; i < imagem.largura; i++){
+    for (int i = 0; i < imagem.altura; i++){
         free(imagem.mat[i]);
     }   
     free(imagem.mat);
