@@ -1,8 +1,8 @@
-image 700 500
-color 100 170 200
+image 40 40
+color 0 0 0
 clear 0 0 0
-line 10 400 400 200
-polygon 100 100 100 200 0 200 0 100
-circle 200 100 50
-fill 101 30                    
+line 2 2 20 2
+polygon 4 4 4 10 10 10 10 4 
+circle 5 5 2
+fill 5 5                    
 save imagem.ppm

@@ -28,10 +28,12 @@ int main(int argc, char const *argv[]){
 
 	desenho2 = desenharPoligono(p3, p4, p5, p6, desenho1);
 
+	desenharCirculo(p7, lerArquivo().raio, desenho2);
+
 	//preencherForma(p7, corPixel(255,0,0),  desenho2);
-	printf("%d", p8.x);
+	
 	//desenharCirculo(p8, lerArquivo().raio, desenho2);
-	//gerarImagem(desenho3);
+	gerarImagem(desenho3);
 
 	
 	/*

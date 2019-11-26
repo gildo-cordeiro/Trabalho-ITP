@@ -1,4 +1,5 @@
 #include "desenho.h"
+#include <math.h>
 
 int sign(int x){
     if (x > 0){
@@ -80,30 +81,6 @@ PPM desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem){
 }
 
 /**
- * Função: preencherForma;
- * Parametros: 
- *  - y: posição y do ponto por onde iniciará o preenchimento de cor;
- *  - x: posição x do ponto por onde iniciará o preenchimento de cor;
- *  - newColor: nova cor que irá substituir a antiga cor;
- * Retorno: void
- * Descrição: Função para para preecher todo o espaço da imagem onde o ponto foi especificado. A função não deverá 
- *  pintar dentro da figura caso o ponto especificado seja fora da mesma.
- * */
-void preencherForma(Ponto p, Pixel newColor, PPM imagem){
-    if(p.y > imagem.largura || p.y < 0 || p.x > imagem.altura-1 || p.x < 0){ 
-        return;        
-    }
-    printf("x %d alt %d, y %d lar %d\n",p.x,imagem.altura, p.y, imagem.largura);
-    if (Equals(imagem.mat[p.y][p.x], corPixel(100,170,200))) {
-        imagem.mat[p.y][p.x] = corPixel(255,0,0);
-
-        preencherForma(definirPonto(p.y+1, p.x), corPixel(255,0,0), imagem);
-        preencherForma(definirPonto(p.y-1, p.x), corPixel(255,0,0), imagem);
-        preencherForma(definirPonto(p.y, p.x+1), corPixel(255,0,0), imagem);
-        preencherForma(definirPonto(p.y, p.x-1), corPixel(255,0,0), imagem);
-    }
-}
-/**
  * Função: circlePoints;
  * Parametros: 
  *  - p: ponto inicial por onde iniciará o desenho do circulo;
@@ -121,28 +98,63 @@ void CirclePoints(Ponto p, Pixel color, PPM imagem){
     imagem.mat[-p.y][p.x] = color;
     imagem.mat[-p.y][-p.x] = color;
 }
-/**
+/*
  * Função: desenharCirculo;
  * Parametros: 
  *  - radius: tamanho do raio do circulo;
  *  - value: cor da linha do circulo;
  * Retorno: void
  * Descrição: Função para desenhar um circulo a partir do valor do raio especificado
- * */
+ *
+ */
+
 void desenharCirculo(Ponto p, int raio, PPM imagem){
+    
     int x = 0;
-    int y = raio;
-    int d = 1 - raio;
-    CirclePoints(definirPonto(x, y), corPixel(255,255,255), imagem);
-    while(y > x) {
-        if (d < 0){
-            d += 2 * x + 3;
-        }else {
-            d += 2 * (x - y) + 5;
-            y--;
-        }
+    int y = imagem.raio;
+
+    float d = (5.0/4.0) - imagem.raio;
+    CirclePoints(definirPonto(p.x, p.y), corPixel(255,255,255), imagem);
+    
+    while(x < y){
+        x = x + 1;
+    if(d < 0){
+        d = d + 2*x+1;
+    } else{
+        y = y - 1;
+        d = d + 2*(x - y) + 1;
     }
-    x++;
-    CirclePoints(definirPonto(x, y), corPixel(255,255,255), imagem);
+        CirclePoints(definirPonto(p.x, p.y), corPixel(255,255,255), imagem);
+    }
+}  
+
+/**
+ * Função: preencherForma;
+ * Parametros: 
+ *  - y: posição y do ponto por onde iniciará o preenchimento de cor;
+ *  - x: posição x do ponto por onde iniciará o preenchimento de cor;
+ *  - newColor: nova cor que irá substituir a antiga cor;
+ * Retorno: void
+ * Descrição: Função para para preecher todo o espaço da imagem onde o ponto foi especificado. A função não deverá 
+ *  pintar dentro da figura caso o ponto especificado seja fora da mesma.
+ * */
+
+/*
+void preencherForma(Ponto p, Pixel newColor, PPM imagem){
+    if(p.y > imagem.largura || p.y < 0 || p.x > imagem.altura-1 || p.x < 0){ 
+        return;        
+    }
+
+    printf("x %d alt %d, y %d lar %d\n",p.x,imagem.altura, p.y, imagem.largura);
+
+    if (Equals(imagem.mat[p.y][p.x], corPixel(255,0,0))){
+        imagem.mat[p.y][p.x] = corPixel(255,0,//0);
+
+        preencherForma(definirPonto(p.y+1, p.x), corPixel(255,0,0), imagem);
+        preencherForma(definirPonto(p.y-1, p.x), corPixel(255,0,0), imagem);
+        preencherForma(definirPonto(p.y, p.x+1), corPixel(255,0,0), imagem);
+        preencherForma(definirPonto(p.y, p.x-1), corPixel(255,0,0), imagem);
+    }
 }
+*/
 
