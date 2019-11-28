@@ -102,7 +102,7 @@ PPM *desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM *imagem, Pixel
  * Descrição: Função para para preecher todo o espaço da imagem onde o ponto foi especificado. A função não deverá
  *  pintar dentro da figura caso o ponto especificado seja fora da mesma.
  **/ 
-void preencherForma(int x, int y,Pixel oldColor, Pixel newColor, PPM *imagem){
+void preencherForma(int y, int x,Pixel oldColor, Pixel newColor, PPM *imagem){
     if(y > imagem->largura - 1 || y < 0 || x > imagem->altura - 1 || x < 0){
         return;
     }
@@ -129,8 +129,8 @@ void preencherForma(int x, int y,Pixel oldColor, Pixel newColor, PPM *imagem){
  * Retorno: void
  * Descrição: Função auxiliar para setar o pixel na matriz.
  **/
-void setPixel(int x, int y, Pixel cor, PPM *desenho){
-    desenho->mat[x][y] = cor;
+void setPixel(int y, int x, Pixel cor, PPM *desenho){
+    desenho->mat[y][x] = cor;
 }
 
 /**
@@ -175,7 +175,7 @@ void desenharCirculo(int px, int py, int raio, Pixel cor, PPM *imagem){
     int y = raio;
 
     float pk = (15.0/14.0) - raio;
-    circlePoints(px, py, x, y, cor, imagem);
+    circlePoints(py,px, y, x, cor, imagem);
 
     while(x < y)  {
         x = x + 1;
@@ -185,7 +185,7 @@ void desenharCirculo(int px, int py, int raio, Pixel cor, PPM *imagem){
             y = y - 1;
             pk = pk + 2*(x - y) + 1;
         }
-        circlePoints(px, py, x, y, cor, imagem);
+        circlePoints(py,px, y, x, cor, imagem);
     }
 }
 

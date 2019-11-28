@@ -39,7 +39,7 @@ int main(int argc, char const *argv[])
 	
     gerarImagem(desenho);
 
-for (int i = 0; i < desenho->altura; i++)
+	for (int i = 0; i < desenho->altura; i++)
     {
         free(desenho->mat[i]);
     }
