@@ -26,20 +26,17 @@ int main(int argc, char const *argv[])
     p7 = definirPonto(desenho->ponto[6].x,desenho->ponto[6].y);
 
     //circle
-    p8 = definirPonto(desenho->ponto[7].x, desenho->ponto[7].y);
 	//printf("%d", desenho->pixel[1].red);
     desenho = desenharLinha(p1, p2, desenho, desenho->pixel[1]);
 
     desenho = desenharPoligono(p3, p4, p5, p6, desenho, desenho->pixel[1]);
 
-	desenho = desenharBezier(definirPonto(10,10), definirPonto(10,20),definirPonto(5,20), definirPonto(10,10), desenho);
+	//desenho = desenharBezier(definirPonto(10,10), definirPonto(10,20),definirPonto(5,20), definirPonto(10,10), desenho);
 
-    //desenharCirculo(p7, lerArquivo().raio, desenho2);
+    desenharCirculo(desenho->ponto[7].x,desenho->ponto[7].y, desenho->raio,desenho->pixel[1], desenho);
 
     preencherForma(p7.x,p7.y, desenho->pixel[0], desenho->pixel[2], desenho);
-
-
-    //desenharCirculo(p8, lerArquivo().raio, desenho2);
+	
     gerarImagem(desenho);
 
 for (int i = 0; i < desenho->altura; i++)

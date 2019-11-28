@@ -62,6 +62,7 @@ PPM *lerArquivo(PPM *imagem)
         else if(strcmp(comando,"circle") == 0)
         {
             fscanf(arquivo, "%d %d %d", &imagem->ponto[7].x, &imagem->ponto[7].y, &imagem->raio);
+            printf("o raio esta aqui(soda) %d\n",imagem->raio);
 
         }
         else if(strcmp(comando,"save") == 0)
