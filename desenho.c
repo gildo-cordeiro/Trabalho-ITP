@@ -210,4 +210,30 @@ PPM *desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM *imagem, Pixel
 //   }
 // }
 
+/**
+ * Função: desenharBezier;
+ * Parametros:
+ *  - y: posição y do ponto por onde iniciará o preenchimento de cor;
+ *  - x: posição x do ponto por onde iniciará o preenchimento de cor;
+ *  - newColor: nova cor que irá substituir a antiga cor;
+ * Retorno: void
+ * Descrição: Função para para preecher todo o espaço da imagem onde o ponto foi especificado. A função não deverá
+ *  pintar dentro da figura caso o ponto especificado seja fora da mesma.
+ * */
+
+PPM *desenharBezier(Ponto A, Ponto B, Ponto C, Ponto D, PPM *imagem){ 
+    for (double t = 0.0; t < 1.0; t += 0.1){        
+        Ponto p = drawPoint(A, B, C, D, t);
+        imagem->mat[p.y][p.x] = corPixel(255,255,255);        
+    }   
+    return imagem; 
+}
+
+Ponto drawPoint(Ponto A, Ponto B, Ponto C, Ponto D, double t){
+    Ponto p;
+    p.x = ((1 - t)*(1 - t)*(1 - t)) * A.x + 3 * t * ((1 -t)*(1 -t)) * B.x + 3 * (1-t) * (t*t)* C.x + (t*t*t)* D.x;
+    p.y = ((1 - t)*(1 - t)*(1 - t)) * A.y + 3 * t * ((1 -t)*(1 -t)) * B.y + 3 * (1-t) * (t*t)* C.y + (t*t*t)* D.x;
+
+    return p;
+}
 

@@ -32,6 +32,8 @@ int main(int argc, char const *argv[])
 
     desenho = desenharPoligono(p3, p4, p5, p6, desenho, desenho->pixel[1]);
 
+	desenho = desenharBezier(definirPonto(10,10), definirPonto(10,20),definirPonto(5,20), definirPonto(10,10), desenho);
+
     //desenharCirculo(p7, lerArquivo().raio, desenho2);
 
     preencherForma(p7.x,p7.y, desenho->pixel[0], desenho->pixel[2], desenho);

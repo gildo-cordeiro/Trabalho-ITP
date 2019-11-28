@@ -16,3 +16,7 @@ void preencherForma(int x, int y,Pixel oldColor, Pixel newColor, PPM *imagem);
 void CirclePoints(Ponto p, Pixel color, PPM imagem);
 
 void desenharCirculo(Ponto p, int raio, PPM imagem);
+
+PPM *desenharBezier(Ponto A, Ponto B, Ponto C, Ponto D, PPM *imagem);
+
+Ponto drawPoint(Ponto A, Ponto B, Ponto C, Ponto D, double t);
