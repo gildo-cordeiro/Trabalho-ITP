@@ -3,10 +3,11 @@
 
 #include "pixel.h"
 
-typedef struct ponto{
-	int x, y;
-	Pixel RGB;
-}Ponto;
+typedef struct ponto
+{
+    int x, y;
+    Pixel RGB;
+} Ponto;
 
 int valorX (Ponto p);
 

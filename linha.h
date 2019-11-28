@@ -3,9 +3,10 @@
 
 #include "ponto.h"
 
-typedef struct linha{
+typedef struct linha
+{
     Ponto p1, p2;
-}Linha;
+} Linha;
 
 Linha definirLinha(Ponto p1, Ponto p2);
 

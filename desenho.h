@@ -7,11 +7,11 @@
 
 int sign(int x);
 
-PPM desenharLinha(Ponto ponto1, Ponto ponto2,PPM imagem);
+PPM *desenharLinha(Ponto ponto1, Ponto ponto2,PPM *imagem, Pixel Color);
 
-PPM desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM imagem);
+PPM *desenharPoligono(Ponto p1, Ponto p2, Ponto p3, Ponto p4, PPM *imagem, Pixel Color);
 
-void preencherForma(Ponto p, Pixel newColor, PPM imagem);
+void preencherForma(int x, int y,Pixel oldColor, Pixel newColor, PPM *imagem);
 
 void CirclePoints(Ponto p, Pixel color, PPM imagem);
 
