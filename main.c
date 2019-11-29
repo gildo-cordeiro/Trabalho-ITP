@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
 
     desenho = desenharPoligono(p3, p4, p5, p6, desenho, desenho->pixel[1]);
 
-	//desenho = desenharBezier(definirPonto(10,10), definirPonto(10,20),definirPonto(5,20), definirPonto(10,10), desenho);
+	desenharBezier(50,50,100,100,130,130,corPixel(255,255,255), desenho);
 
     desenharCirculo(desenho->ponto[7].x,desenho->ponto[7].y, desenho->raio,desenho->pixel[1], desenho);
 

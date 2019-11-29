@@ -199,19 +199,26 @@ void desenharCirculo(int px, int py, int raio, Pixel cor, PPM *imagem){
  * Descrição: Função para para preecher todo o espaço da imagem onde o ponto foi especificado. A função não deverá
  *  pintar dentro da figura caso o ponto especificado seja fora da mesma.
  * */
-PPM *desenharBezier(Ponto A, Ponto B, Ponto C, Ponto D, PPM *imagem){ 
-    for (double t = 0.0; t < 1.0; t += 0.1){        
-        Ponto p = drawPoint(A, B, C, D, t);
-        imagem->mat[p.y][p.x] = corPixel(255,255,255);        
-    }   
-    return imagem; 
+
+void desenharBezier(int x1, int x2, int x3, int y1, int y2, int y3, Pixel cor, PPM *desenho){
+
+    for(float i = 0; i < 1; i += 0.01){
+        // linha verde
+        int xa = getPt(x1, x2, i);
+        int ya = getPt(y1, y2, i);
+        int xb = getPt(x2, x3, i);
+        int yb = getPt(y2, y3, i);
+
+        // ponto preto
+        int x = getPt(xa, xb, i);
+        int y = getPt(ya, yb, i);
+
+        setPixel(x, y, cor, desenho);
+    }
+
 }
+int getPt(int n1, int n2, float perc){
 
-Ponto drawPoint(Ponto A, Ponto B, Ponto C, Ponto D, double t){
-    Ponto p;
-    p.x = ((1 - t)*(1 - t)*(1 - t)) * A.x + 3 * t * ((1 -t)*(1 -t)) * B.x + 3 * (1-t) * (t*t)* C.x + (t*t*t)* D.x;
-    p.y = ((1 - t)*(1 - t)*(1 - t)) * A.y + 3 * t * ((1 -t)*(1 -t)) * B.y + 3 * (1-t) * (t*t)* C.y + (t*t*t)* D.x;
-
-    return p;
+    int diff = n2 - n1;
+    return n1 + (diff * perc);
 }
-

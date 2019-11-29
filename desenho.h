@@ -17,10 +17,12 @@ void CirclePoints(Ponto p, Pixel color, PPM imagem);
 
 void desenharCirculo(int cxc, int cyc, int rc, Pixel cor, PPM *mat);
 
-PPM *desenharBezier(Ponto A, Ponto B, Ponto C, Ponto D, PPM *imagem);
+void desenharBezier(int x1, int x2, int x3, int y1, int y2, int y3, Pixel cor, PPM *desenho);
 
 Ponto drawPoint(Ponto A, Ponto B, Ponto C, Ponto D, double t);
 
 void circlePoints(int xc, int yc, int x, int y, Pixel cor, PPM *imagem);
 
 void setPixel(int x, int y, Pixel cor, PPM *desenho);
+
+int getPt(int n1, int n2, float perc);
