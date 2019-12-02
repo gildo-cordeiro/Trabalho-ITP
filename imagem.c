@@ -46,7 +46,6 @@ PPM *lerArquivo(PPM *imagem)
         else if(strcmp(comando,"line") == 0)
         {
             fscanf(arquivo, "%d %d %d %d", &imagem->ponto[0].x, &imagem->ponto[0].y, &imagem->ponto[1].x, &imagem->ponto[1].y);
-
         }
         else if(strcmp(comando,"polygon") == 0)
         {

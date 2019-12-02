@@ -25,8 +25,8 @@ int sign(int x)
  * */
 PPM *desenharLinha(Ponto ponto1, Ponto ponto2, PPM *imagem, Pixel Color)
 {
+    //printf("%d", Color.red);
     int dx, dy, x, y, d, s1, s2, swap=0, temp;
-    printf("%d",Color.red);
 
     dx = abs(ponto2.x - ponto1.x);
     dy = abs(ponto2.y - ponto1.y);

@@ -2,9 +2,9 @@ image 300 300
 color 100 170 200
 clean 0 0 255
 line 20 20 200 20
-polygon 10 10 10 30 30 30 30 10
+polygon 100 100 100 200 200 200 200 100
 circle 200 100 50
 color 255 255 255
-fill 200 100
+fill 210 210
 color 255 0 0                  
 save imagem.ppm
