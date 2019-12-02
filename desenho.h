@@ -26,3 +26,5 @@ void circlePoints(int xc, int yc, int x, int y, Pixel cor, PPM *imagem);
 void setPixel(int x, int y, Pixel cor, PPM *desenho);
 
 int getPt(int n1, int n2, float perc);
+
+void clean(Pixel cor, PPM *desenho);

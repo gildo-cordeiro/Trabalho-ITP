@@ -132,7 +132,6 @@ void preencherForma(int y, int x,Pixel oldColor, Pixel newColor, PPM *imagem){
 void setPixel(int y, int x, Pixel cor, PPM *desenho){
     desenho->mat[y][x] = cor;
 }
-
 /**
  * Função: circlePoints;
  * Parametros:
@@ -199,7 +198,6 @@ void desenharCirculo(int px, int py, int raio, Pixel cor, PPM *imagem){
  * Descrição: Função para para preecher todo o espaço da imagem onde o ponto foi especificado. A função não deverá
  *  pintar dentro da figura caso o ponto especificado seja fora da mesma.
  * */
-
 void desenharBezier(int x1, int x2, int x3, int y1, int y2, int y3, Pixel cor, PPM *desenho){
 
     for(float i = 0; i < 1; i += 0.01){
@@ -218,7 +216,14 @@ void desenharBezier(int x1, int x2, int x3, int y1, int y2, int y3, Pixel cor, P
 
 }
 int getPt(int n1, int n2, float perc){
-
     int diff = n2 - n1;
     return n1 + (diff * perc);
+}
+
+void clean(Pixel cor, PPM *desenho){
+    for (int i = 0; i < desenho->altura; i++){
+        for (int j = 0; j < desenho->largura; j++){
+            desenho->mat[i][j] = cor;    
+        }        
+    }    
 }

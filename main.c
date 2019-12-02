@@ -37,6 +37,8 @@ int main(int argc, char const *argv[])
 
     preencherForma(p7.x,p7.y, desenho->pixel[0], desenho->pixel[2], desenho);
 	
+	//clean(corPixel(desenho->clean.red,desenho->clean.green, desenho->clean.blue), desenho);
+	
     gerarImagem(desenho);
 
 	for (int i = 0; i < desenho->altura; i++)

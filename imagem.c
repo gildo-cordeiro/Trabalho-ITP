@@ -36,7 +36,7 @@ PPM *lerArquivo(PPM *imagem)
         else if(strcmp(comando,"color") == 0)
         {
             fscanf(arquivo,"%d %d %d",&imagem->pixel[cont].red, &imagem->pixel[cont].green, &imagem->pixel[cont].blue);
-            printf("contador  %d, red %d",cont,imagem->pixel[cont].red);
+            //printf("contador  %d, red %d",cont,imagem->pixel[cont].red);
             cont++;
         }
         else if(strcmp(comando,"clean") == 0)
@@ -62,7 +62,7 @@ PPM *lerArquivo(PPM *imagem)
         else if(strcmp(comando,"circle") == 0)
         {
             fscanf(arquivo, "%d %d %d", &imagem->ponto[7].x, &imagem->ponto[7].y, &imagem->raio);
-            printf("o raio esta aqui(soda) %d\n",imagem->raio);
+            //printf("o raio esta aqui(soda) %d\n",imagem->raio);
 
         }
         else if(strcmp(comando,"save") == 0)
